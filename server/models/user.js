@@ -68,6 +68,11 @@ let userSchema = new Schema(
     }
 );
 
+userSchema.pre(['save'], function capitalizeFields (next) {
+    this.name = capitalize(this.name);
+    next();
+});
+
 userSchema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();
@@ -79,11 +84,6 @@ userSchema.methods.toJSON = function() {
 userSchema.plugin( uniqueValidator, {
     message: '{PATH} must be unique'
 } );
-
-userSchema.pre('save', function capitalizeFields (next) {
-    this.name = capitalize(this.name);
-    next();
-});
 
 function capitalize (name) {
     return name.replace(/\b(\w)/g, s => s.toUpperCase());
