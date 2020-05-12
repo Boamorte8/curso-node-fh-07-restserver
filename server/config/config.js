@@ -14,6 +14,11 @@ if (!envFound) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 // =================================================================
+// Expiration token
+// =================================================================
+process.env.EXPIRATION_TOKEN = 60 * 60 * 24 * 30;
+
+// =================================================================
 // BD
 // =================================================================
 let urlDB;
@@ -31,7 +36,7 @@ module.exports = {
         level: process.env.LOG_LEVEL || 'silly'
     },
     auth: {
-        secret: process.env.SECRET
+        secret: process.env.SECRET_SEED
     },
     db: {
         url: urlDB

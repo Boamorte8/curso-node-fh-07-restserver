@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-
-app.use( require('./api/routes/user') );
+// Global routes configuration
+app.use( require('./api/routes/index') );
 
 
 mongoose.connect(config.db.url,

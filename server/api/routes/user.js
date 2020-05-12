@@ -8,6 +8,8 @@ const config = require('../../config/config');
 
 const User = require('../../models/user');
 
+const { verifyToken, verifyPermission } = require('../middlewares/auth');
+
 answerRequest = (err, res, userDB) => {
     if (err) {
         return res.status(400).json({
@@ -25,7 +27,7 @@ app.get('/', function (req, res) {
     res.json(`Hello World LOCAL! - API Working - ${new Date().toString()} - ${config.version}`);
 });
 
-app.get('/user', function (req, res) {
+app.get('/user', verifyToken, function (req, res) {
 
     let since = req.query.since || 0;
     since = Number(since);
@@ -57,7 +59,7 @@ app.get('/user', function (req, res) {
         });
 });
 
-app.post('/user', function (req, res) {
+app.post('/user', [verifyToken, verifyPermission], function (req, res) {
     const body = req.body;
 
     const user = new User({
@@ -73,7 +75,7 @@ app.post('/user', function (req, res) {
 
 });
 
-app.put('/user/:id', function (req, res) {
+app.put('/user/:id', [verifyToken, verifyPermission], function (req, res) {
     const id = req.params.id;
     const body = _.pick(req.body, ['name', 'email', 'img', 'role', 'state']);
     const options = {
@@ -87,7 +89,7 @@ app.put('/user/:id', function (req, res) {
 });
 
 
-app.delete('/user/:id', function (req, res) {
+app.delete('/user/:id', verifyToken, function (req, res) {
     const id = req.params.id;
 
     const options = {
