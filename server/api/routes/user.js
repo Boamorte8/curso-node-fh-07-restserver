@@ -23,7 +23,7 @@ answerRequest = (err, res, userDB) => {
     });
 }
 
-app.get('/', function (req, res) {
+app.get('/version', function (req, res) {
     res.json(`Hello World LOCAL! - API Working - ${new Date().toString()} - ${config.version}`);
 });
 

@@ -36,7 +36,8 @@ module.exports = {
         level: process.env.LOG_LEVEL || 'silly'
     },
     auth: {
-        secret: process.env.SECRET_SEED
+        secret: process.env.SECRET_SEED,
+        google_client_id: process.env.GOOGLE_CLIENT_ID
     },
     db: {
         url: urlDB

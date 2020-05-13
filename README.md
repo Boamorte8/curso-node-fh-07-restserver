@@ -15,3 +15,7 @@ Create in the root project the .env file for the properties of configuration wit
 ```
  npm run dev
 ```
+
+### Documentation
+
+In this [link](https://documenter.getpostman.com/view/468818/Szmh4HSL)
