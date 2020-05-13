@@ -18,4 +18,6 @@ Create in the root project the .env file for the properties of configuration wit
 
 ### Documentation
 
+[Google Sign In](https://developers.google.com/identity/sign-in/web/backend-auth)
+
 In this [link](https://documenter.getpostman.com/view/468818/Szmh4HSL)
