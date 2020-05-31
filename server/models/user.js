@@ -26,8 +26,7 @@ let Schema = mongoose.Schema;
 // min: Date
 // max: Date
 
-let userSchema = new Schema(
-    {
+let userSchema = new Schema({
         name: {
             type: String,
             required: [true, 'Needs full name'], // can be a function
@@ -65,8 +64,7 @@ let userSchema = new Schema(
     },
     {
         timestamps: true
-    }
-);
+});
 
 userSchema.pre(['save'], function capitalizeFields (next) {
     this.name = capitalize(this.name);

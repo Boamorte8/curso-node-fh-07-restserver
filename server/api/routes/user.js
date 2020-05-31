@@ -23,11 +23,11 @@ answerRequest = (err, res, userDB) => {
     });
 }
 
-app.get('/version', function (req, res) {
+app.get('/version', (req, res) => {
     res.json(`Hello World LOCAL! - API Working - ${new Date().toString()} - ${config.version}`);
 });
 
-app.get('/user', verifyToken, function (req, res) {
+app.get('/user', verifyToken, (req, res) => {
 
     let since = req.query.since || 0;
     since = Number(since);
@@ -59,7 +59,7 @@ app.get('/user', verifyToken, function (req, res) {
         });
 });
 
-app.post('/user', [verifyToken, verifyPermission], function (req, res) {
+app.post('/user', [verifyToken, verifyPermission], (req, res) => {
     const body = req.body;
 
     const user = new User({
@@ -75,7 +75,7 @@ app.post('/user', [verifyToken, verifyPermission], function (req, res) {
 
 });
 
-app.put('/user/:id', [verifyToken, verifyPermission], function (req, res) {
+app.put('/user/:id', [verifyToken, verifyPermission], (req, res) => {
     const id = req.params.id;
     const body = _.pick(req.body, ['name', 'email', 'img', 'role', 'state']);
     const options = {
@@ -89,7 +89,7 @@ app.put('/user/:id', [verifyToken, verifyPermission], function (req, res) {
 });
 
 
-app.delete('/user/:id', verifyToken, function (req, res) {
+app.delete('/user/:id', verifyToken, (req, res) => {
     const id = req.params.id;
 
     const options = {
