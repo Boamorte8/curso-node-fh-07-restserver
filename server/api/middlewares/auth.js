@@ -25,6 +25,29 @@ const verifyToken = (req, res, next) => {
 }
 
 /**
+ * Function to verify token on url
+ *
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const verifyTokenImg = (req, res, next) => {
+    let token = req.query.token;
+    jwt.verify(token, config.auth.secret, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Invalid token',
+                }
+            });
+        }
+        req.user = decoded.user;
+        next();
+    });
+}
+
+/**
  * Function to verify user has admin role
  *
  * @param {*} req
@@ -45,5 +68,6 @@ const verifyPermission = (req, res, next) => {
 
 module.exports = {
     verifyToken,
+    verifyTokenImg,
     verifyPermission
 };
